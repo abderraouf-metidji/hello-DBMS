@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
     <h1>{% block title %} Dashboard {% endblock %}</h1>
-
     {% for post in posts %}
         <a href="#">
             <h2>{{ post.title }}</h2>
@@ -11,12 +8,10 @@
         <span class="badge badge-primary">{{ post['created'] }}</span>
         <hr>
     {% endfor %}
-
     <div>
         <h3> Project context</h3>
         <p>This project revolves around the analysis and study of pollution and energy production for multiple countries and regions in the world. The goal of this project is to discuss the different types of energy production, what they imply in terms of pollution and the consequences. We'll also be able to discuss the countries that pollute the most, same for the regions.</p>
     </div>
-
     <div class="row">
         <div class="col-md-6">
             <h2>Top 10 Countries by Coal Consumption</h2>
@@ -33,7 +28,6 @@
                 {% endfor %}
             </table>
         </div>
-
         <div class="col-md-6">
             <h2>Top 10 Countries by Gas Consumption</h2>
             <table class="table">
@@ -49,7 +43,6 @@
                 {% endfor %}
             </table>
         </div>
-
         <div class="col-md-6">
             <h2>Top 10 Countries by Oil Consumption</h2>
             <table class="table">
@@ -65,7 +58,6 @@
                 {% endfor %}
             </table>
         </div>
-
         <div class="col-md-6">
             <h2>Top 10 Countries by Hydro Consumption</h2>
             <table class="table">
@@ -81,7 +73,6 @@
                 {% endfor %}
             </table>
         </div>
-
         <div class="col-md-6">
             <h2>Top 10 Countries by Renewable Consumption</h2>
             <table class="table">
@@ -97,7 +88,6 @@
                 {% endfor %}
             </table>
         </div>
-
         <div class="col-md-6">
             <h2>Top 10 Countries by Nuclear Consumption</h2>
             <table class="table">
@@ -114,7 +104,6 @@
             </table>
         </div>
     </div>
-
     <h2>Country Sample</h2>
     <table class="table">
         <tr>
@@ -138,7 +127,6 @@
             </tr>
         {% endfor %}
     </table>
-
     <h2>World</h2>
     <table class="table">
         <tr>
@@ -162,7 +150,6 @@
             </tr>
         {% endfor %}
     </table>
-    
     <h2>Pollution - Country</h2>
     <table class="table">
         <tr>
@@ -194,7 +181,6 @@
             </tr>
         {% endfor %}
     </table>
-
     <h2>Pollution - World</h2>
     <table class="table">
         <tr>
@@ -226,7 +212,6 @@
             </tr>
         {% endfor %}
     </table>
-    
     <form method="POST" action="{{ url_for('selected_country_pollution') }}">
         <label for="selected_country">Select Country:</label>
         <select name="selected_country" id="selected_country">
@@ -236,7 +221,6 @@
         </select>
         <button type="submit">Submit</button>
     </form>    
-
     <form method="POST" action="{{ url_for('selected_region_pollution') }}">
         <label for="selected_region">Select Region:</label>
         <select name="selected_region" id="selected_region">
@@ -246,7 +230,6 @@
         </select>
         <button type="submit">Submit</button>
     </form>   
-
     {% if selected_country %}
         <h2>Pollution - {{ selected_country }}</h2>
         <table class="table">

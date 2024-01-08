@@ -1,16 +1,12 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
     <h1>{% block title %} Pollution Data - {{ selected_country }} {% endblock %}</h1>
-
     <form method="post" action="{{ url_for('calculate_emissions') }}">
         <label for="power_consumption">Power Consumption (KW):</label>
         <input type="text" name="power_consumption" required>
         <input type="hidden" name="total_emissions_per_kwh" value="{{ selected_country_pollution[0].total_emissions }}">
         <button type="submit">Calculate</button>
     </form>
-
     {% if selected_country_pollution %}
         <table class="table">
             <tr>
@@ -34,5 +30,4 @@
             </tr>
         </table>
     {% endif %}
-
 {% endblock %}

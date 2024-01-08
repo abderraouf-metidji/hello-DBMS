@@ -9,7 +9,6 @@ conn = mysql.connector.connect(
 )
 
 cursor = conn.cursor()
-
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -23,7 +22,6 @@ def index():
         'Nuclear': {'median': 12}
     }
 
-    # Your existing code for rendering data
     cursor.execute('SELECT * FROM country ORDER BY Coal DESC LIMIT 10')
     coal_data = cursor.fetchall()
     cursor.execute('SELECT * FROM country ORDER BY Oil DESC LIMIT 10')
@@ -89,13 +87,10 @@ def index():
 def selected_country_pollution():
     if request.method == 'POST':
         selected_country = request.form['selected_country']
-
-        # Fetch data for the selected country
         query = f"SELECT * FROM country WHERE Country = '{selected_country}' LIMIT 1"
         cursor.execute(query)
         selected_country_data = cursor.fetchone()
 
-        # Perform pollution calculation for the selected country
         emission_factors = {
             'Coal': {'median': 820},
             'Gas': {'median': 490},
@@ -122,7 +117,6 @@ def selected_country_pollution():
 
         return render_template('selected_country_pollution.html', selected_country=selected_country, selected_country_pollution=selected_country_pollution)
 
-    # Render the initial page for GET requests
     return render_template('selected_country_pollution.html', selected_country=None, selected_country_pollution=None)
 
 @app.route('/calculate_emissions', methods=['POST'])
@@ -130,25 +124,21 @@ def calculate_emissions():
     if request.method == 'POST':
         total_emissions_per_kwh = float(request.form['total_emissions_per_kwh'])
         power_consumption = float(request.form['power_consumption'])
-        
-        # Total emissions calculation
+
         total_emissions = total_emissions_per_kwh * power_consumption * 24 * 365 / 1000
         total_emissions = round(total_emissions, 2)
 
         return render_template('calculated_emissions.html', total_emissions=total_emissions)
-
 
 @app.route('/selected_region_pollution', methods=['GET', 'POST'])
 def selected_region_pollution():
     if request.method == 'POST':
         selected_region = request.form['selected_region']
 
-        # Fetch data for the selected region
         query_world = f"SELECT * FROM world WHERE Region = '{selected_region}' LIMIT 1"
         cursor.execute(query_world)
         selected_region_data = cursor.fetchone()
 
-        # Perform pollution calculation for the selected region
         emission_factors = {
             'Coal': {'median': 820},
             'Gas': {'median': 490},
@@ -175,7 +165,6 @@ def selected_region_pollution():
 
         return render_template('selected_region_pollution.html', selected_region=selected_region, selected_region_pollution=selected_region_pollution)
 
-    # Render the initial page for GET requests
     return render_template('selected_region_pollution.html', selected_region=None, selected_region_pollution=None)
 
 @app.route('/calculate_emissions_region', methods=['POST'])
@@ -184,7 +173,6 @@ def calculate_emissions_region():
         total_emissions_per_kwh = float(request.form['total_emissions_per_kwh'])
         power_consumption = float(request.form['power_consumption'])
 
-        # Total emissions calculation
         total_emissions = total_emissions_per_kwh * power_consumption * 24 * 365 / 1000
         total_emissions = round(total_emissions, 2)
 
