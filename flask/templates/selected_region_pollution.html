@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{% block title %} Pollution Data - {{ selected_region }} {% endblock %}</h1>
+
+    <form method="post" action="{{ url_for('calculate_emissions_region') }}">
+        <label for="power_consumption">Power Consumption (KW):</label>
+        <input type="text" name="power_consumption" required>
+        <input type="hidden" name="total_emissions_per_kwh" value="{{ selected_region_pollution[0].total_emissions_world }}">
+        <button type="submit">Calculate</button>
+    </form>
+
+    <table class="table">
+        <tr>
+            <th class="text-center">Source</th>
+            <th class="text-center">% Utilisation</th>
+            <th class="text-center">Emissions gCO2/kWh</th>
+            <th class="text-center">% of total CO2 Emissions</th>
+        </tr>
+        {% for pollution_data in selected_region_pollution %}
+            <tr>
+                <td>{{ pollution_data.source }}</td>
+                <td>{{ pollution_data.usage_percentage }}</td>
+                <td>{{ pollution_data.pollution }}</td>
+                <td>{{ pollution_data.percentage_of_total_emissions_world }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>Total gCO2/kWh Emissions</td>
+            <td></td>
+            <td>{{ selected_region_pollution[0].total_emissions_world }}</td>
+        </tr>
+    </table>
+
+{% endblock %}

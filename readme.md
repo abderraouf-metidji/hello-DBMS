@@ -235,5 +235,12 @@ CROSS JOIN: Returns the Cartesian product of the two tables (all possible combin
 
 ## Project Context
 
+The context of this project was the study and analysis of the carbon emission of multiple countries and regions based on data from 2015. 
+
+The goal was to, first exercise on SQL in order to grasp the different requests available to us and how to use them. The second part of the project, called the 'Big Job', was to use the data to create a dashboard using Flask. The dashboard contains a summary, a sample of the data with a few important numbers as well as the possibility to select and calculate the pollution of a specific country or region. 
+
+I have created multiple routes in order to only show the important information once a selection has been done and I have decided to separate the routes based on if the selection is a country or a region. 
+
 ## Conclusion
 
+We were able to see with this project which countries and/or region have the most carbon emission in the world as well as understand which renewable energy is best when it comes to that emission. 
